@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} 상품리스트 {% endblock %}
+
+{% block content %}  
+
+ 
+
+<button type="button" class="btn btn-success"><strong>신규상품</strong></button>
+<div class="row"> 
+    {% for prod in n_list %}
+	<div class="col-3">
+		 <div class="card">
+		{% if prod.pro_img %}<img class="cart-img-top"  src="{{prod.pro_img.url}}" style="width:100%;">{% endif %}
+		</div>
+		<div class="card-body">
+		<a href="{% url 'product:detail' pk=prod.id %}">{{ prod.pro_name }}</a> :: 가격 : {{ prod.pro_price }}원 <a href="">[수정]</a> <a href="">[삭제]</a>
+
+		</div>
+
+	</div>
+
+    {% endfor %}
+
+
+
+{% endblock %}

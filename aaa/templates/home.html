@@ -1,0 +1,18 @@
+<style>
+li { color: blue;}
+h2 {color : green; 
+    opacity : 0.5;}
+div { background-color : gay;}
+a {color : gay;}
+</style>
+
+{% extends "base.html" %}
+
+{% block content %}
+<div><h2>Django 어플리케이션 목록</h2></div>
+<ul>
+{% for appname in app_list %}
+<li><a href ="{{appname}}">{{ appname }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

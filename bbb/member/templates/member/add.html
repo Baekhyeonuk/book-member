@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} 회원리스트 {% endblock %}
+{% block content %}
+
+{% load static %}
+<br>
+<img src="{% static 'member/t1.jpg' %}" alt="My image" width="300">
+<br>
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="회원가입" />
+</form>
+{% endblock %}

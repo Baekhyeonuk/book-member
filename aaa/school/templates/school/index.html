@@ -1,0 +1,48 @@
+<script>
+
+function del(id){
+	var delmsg = confirm("정말 삭제하시겠습니까?")
+
+	if(delmsg) {
+		var URL="/school/"+id+"/remove/"; 
+		location.href=URL;
+	}
+
+}
+</script>
+
+<h1><a href="/school/add/">학생추가</a> <a href ="/school/sub_add/">과목추가</a></h1>
+
+{% if latest_student_list %}
+
+<table border="1">
+
+<h3>등록된 학생수({{latest_student_list.count}})</h3>
+
+	<tr>
+		<th>번 호</th>
+		<th>학생 이름</th>
+		<th>학생 연락처</th>
+		<th>등록된 과목수</th>
+		<th>학생 나이</th>
+		<th>학생 관리</th>
+	</tr>
+    {% for student in latest_student_list  %}
+
+	<tr>
+		<td>{{ student.id }}</td>
+        <td><a href="/school/{{ student.id }}/detail/">{{ student.student_name }}</a></td>
+		<td>{{ student.student_tel }}</td>
+		<td>{{student.subject_set.count }}</td>
+		<td>{{ student.student_age }}</td>
+		<td><a href="/school/{{ student.id }}/update/">[정보수정]</a> <a href="#" onclick="del('{{ student.id }}')">[학생 삭제]</a></li>
+
+	</tr>
+    {% endfor %}
+    </ul>
+
+{% else %}
+
+    <p>학생 데이터가 없습니다.</p>
+
+{% endif %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} 회원리스트 {% endblock %}
+{% block content %}
+<h2><a href="{% url 'member:add' %}">회원가입</a></h2>
+<h3>회원목록</h3>
+    <ul>
+    {% for member in object_list %}
+        <li>{% if member.Mem_img %}<img src="{{ member.Mem_img.url }}" width="100">{% endif %}<a href="{% url 'member:detail' pk=member.id %}">ID : {{ member.Mem_id }}</a> - 이름 : {{ member.Mem_name }} <a href="{% url 'member:edit' pk=member.id %}">[수정]</a> <a href="{% url 'member:remove' pk=member.id %}">[삭제]</a></li>
+    {% endfor %}
+    </ul>
+{% load static %}
+<img src="{% static 'member/t1.jpg' %}" alt="My image" width="100">
+{% endblock %}

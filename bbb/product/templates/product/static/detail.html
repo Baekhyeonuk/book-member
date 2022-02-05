@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} {{object.pro_name}}상세보기 {% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-4">
+            <img src="{{product.pro_img.url}}" width="100%">
+        </div>
+        <div class="col">
+            <h1 class="display-6">{{product.pro_name}}</h1>
+            <p><span class="badge badge-secondary">Price</span>{{product.pro_price}}</p>
+
+            <form action="{% url 'cart:cart_add' product_id=product.id%}" method="post">
+                {{add_to_cart}}
+                {% csrf_token %}
+            <input type="submit" class="btn btn-primary btn-sm" value="장바구니담기">
+            </form>
+
+            <h5>{{product.pro_desc|linebreaks}}</h5>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+

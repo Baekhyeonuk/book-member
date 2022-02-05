@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% block content %}
+
+<script> 
+  function submit2(frm, id) { 
+    frm.action='/cart/mod/'+id+'/'; 
+    frm.submit(); 
+    return true; 
+  } 
+</script>
+
+<p>{{ member.Mem_name }}님의 장바구니 정보입니다.</p>
+    <form action="/cart/order/" method="post">
+    {% csrf_token %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">이미지</th>
+                <th scope="col">상품명</th>
+                <th scope="col">수량</th>
+                <th scope="col">Remove</th>
+                <th scope="col">상품금액</th>
+                <th scope="col">합계</th>
+				<th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_list %}
+				{% with product=item.product %}
+                <tr>
+                    <th scope="row">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{{product.pro_img.url}}" class="img-thumbnail" width="100">
+                        </a>
+                    </th>
+                    <td><input type="checkbox" name="ct_id" value="{{item.id}}">{{product.pro_name}}</td>
+                    <td>{{item.amount}}<br/>재고 : {{product.pro_stock}}</td>
+                    <td><a href="{% url 'cart:cart_remove' item.id %}" calss='btn btn-success btn-sm'>삭제</a></td>
+                    <td class="num">{{item.price|intcomma}}</td>
+                    <td class="num">{{item.total|intcomma}}</td>
+					<td class="num">
+					<form action="" method="post">
+                {{item.add_to_cart.as_p}}
+                {% csrf_token %}
+            <input type="submit" class="btn btn-primary btn-sm" value="수정" onclick='return submit2(this.form, {{item.id}});'>
+            </form>
+					</td>
+                </tr>
+				{% endwith %}
+            {% endfor %}
+		<tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td colspan="2"class="num">{{cart_total|intcomma}}</td>
+        </tr>
+        </tbody>
+    </table>
+	<input type="submit" class='btn btn-success' value="선택삭제">
+	<a href="/order/add" class="btn btn-primary">주문하기</a>    
+	<a href="/product/" class="btn btn-secondary">쇼핑 계속하기</a>
+	</form>
+{% endblock %}

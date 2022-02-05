@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} 회원리스트 {% endblock %}
+{% block content %}
+
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+아이디 : <input type="text" name="mem_id" value="{{member.Mem_id}}"><br />
+비밀번호 : <input type="password" name="mem_pwd" value="{{member.Mem_pwd}}"><br />
+
+<input type="submit" value="로그인" />
+</form>
+{% endblock %}

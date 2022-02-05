@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}주문서 작성{% endblock %}
+
+{% block content %}
+<div class="alert alert-info" role="alert">{{member.Mem_name}} 님의 배송 정보 입니다.</div>
+<form action="" method="post" class="order-form">
+{{form.as_p}}
+{% csrf_token %}
+<div class="alert alert-info" role="alert">Your Order</div>
+<table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">이미지</th>
+                <th scope="col">상품명</th>
+                <th scope="col">수량</th>
+                <th scope="col">상품금액</th>
+                <th scope="col">합계</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_list %}
+				{% with product=item.product %}
+                <tr>
+                    <th scope="row">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{{product.pro_img.url}}" class="img-thumbnail" width="100">
+                        </a>
+                    </th>
+                    <td>{{product.pro_name}}</td>
+                    <td>{{item.amount}}<br/> 재고 : {{product.pro_stock}}</td>
+                    <td class="num">{{item.price|intcomma}}</td>
+                    <td class="num">{{item.total|intcomma}}</td>
+                </tr>
+				{% endwith %}
+            {% endfor %}
+		<tr class="total">
+            <td>Total</td>
+            <td colspan="2"></td>
+            <td colspan="2" class="num"><div class="alert alert-success " role="alert">{{cart_total|intcomma}}</div></td>
+        </tr>
+        </tbody>
+    </table>
+<input type="submit" class="btn btn-danger btn-sm float-right" value="주문하기">
+</form>
+
+{% endblock %}

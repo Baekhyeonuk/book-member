@@ -1,0 +1,16 @@
+<h1>과목등록 페이지</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+학생 선택 :
+{% if student_list  %}
+<select name="student_id">
+	{% for student in student_list  %}
+	<option value="{{ student.id }}">{{ student.student_name }}</option>
+	{% endfor %}
+</select><br />
+{% endif %}
+과목명 : <input type="text" name="subject_text"><br />
+과목개요 : <textarea name="subject_ovew"></textarea><br />
+<input type="submit" value="과목 등록하기">
+</form>

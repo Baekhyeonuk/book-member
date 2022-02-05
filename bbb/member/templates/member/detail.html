@@ -1,0 +1,6 @@
+<h1><회원정보></h1>
+<h3>ID : {{ object.Mem_id }} 이름 : {{ object.Mem_name }}</h3>
+{% load static %}
+<img src="{% static 'member/t1.jpg' %}" alt="My image" width="200">
+
+<a href="{% url 'member:list' %}"> 홈 화면으로 이동 </a>

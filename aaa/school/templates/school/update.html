@@ -1,0 +1,12 @@
+
+
+<h1>{{student.id}} 학생 수정 페이지</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+학생 이름: <input type="text" name="student_name" value="{{student.student_name}}"><br/>
+학생 전화: <input type="text" name="student_tel" value="{{student.student_tel}}"><br/>
+학생 나이: <input type="text" name="student_age" value="{{student.student_age}}"><br/>
+학생 주소: <input type="text" name="student_addr" value="{{student.student_addr}}"><br/>
+<input type="submit" value="학생정보수정하기">
+</form>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% block content %}
+	<script>
+
+   $(document).ready(function(){
+      $("button").click(myFunction);
+   });
+
+	function myFunction(){
+		
+         $.ajax({
+
+			url:"{% url 'member:login_ajax' %}",
+			type: "post",
+			data:{
+
+				mem_id: $("#id").val(),
+				mem_pwd: $("#pwd").val(),
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			
+			},
+			success:function(data){
+				
+				if (data.msg){
+					$("#div1").prepend(data.msg+"<br />");
+				}else{
+					var txt = "아이디 "+data.id+ " - 이름 " +data.name+ " 정상적으로 로그인 하였습니다";
+					$("#div1").html(txt);
+				}
+               
+			},error:function(xhr){
+               
+			   alert(xhr.status);
+			}
+
+         });
+
+	}
+</script>
+<div class="container-sm d-grid gap-3" style="max-width: 500px;">
+
+	<div id="div1">
+	아이디<input type="text" name="mem_id" id="id"><br />
+	비밀번호<input type="text" name="mem_pwd" id="pwd"><br />
+	<button>로그인하기</button>
+	<div>
+
+</div>
+{% endblock %}

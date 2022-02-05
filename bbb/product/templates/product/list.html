@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %} 상품리스트 {% endblock %}
+{% block content %}  
+
+<div class="row">  
+    {% for prod in object_list %}
+	<div class="col-3">
+		 <div class="card">
+		{% if prod.pro_img %}<a href="{% url 'product:detail' pk=prod.id %}"><img class="cart-img-top"  src="{{prod.pro_img.url}}" style="width:100%;"></a>{% endif %}
+		</div>
+		<div class="card-body">
+		<a href="{% url 'product:detail' pk=prod.id %}">{{ prod.pro_name }}</a> <br/> 가격 : {{ prod.pro_price|intcomma  }}원</a>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+
+{{ page_obj }}
+<nav aria-label="...">
+<ul class="pagination">
+{% if page_obj.has_previous %}
+	<li class="page-item">
+		<a class="page-link" href="?page=1">First</a>
+    </li>
+    <li class="page-item">
+		<a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+	</li>
+{% endif %}
+    <li class="page-item active" aria-current="page">
+		<a class="page-link" href="#">{{ page_obj.number }}</a>
+    </li>
+{% if page_obj.has_next %}
+    <li class="page-item">
+		<a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+	</li>
+    <li class="page-item">
+	<a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    </li>
+{% endif %}
+</ul>
+</nav>
+
+
+{% endblock %}

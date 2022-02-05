@@ -1,0 +1,12 @@
+
+
+<h1>학생 등록 페이지</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+학생 이름: <input type="text" name="student_name"><br/>
+학생 전화: <input type="text" name="student_tel"><br/>
+학생 나이: <input type="text" name="student_age"><br/>
+학생 주소: <input type="text" name="student_addr"><br/>
+<input type="submit" value="학생등록하기">
+</form>

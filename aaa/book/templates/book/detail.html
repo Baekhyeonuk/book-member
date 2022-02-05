@@ -1,0 +1,25 @@
+{% load static %} 
+
+<h2>{{ book_info.Book_name }} 도서정보</h2>
+
+{% if book_info %}
+<table border="1">
+
+	<tr>
+		<th>번 호</th>
+		<th>도서소개</th>
+		<th>출판일</th>
+		<th>가격</th>
+	</tr>
+
+	<tr>
+		<td>{{book_info.id}}</td>
+		<td>{{book_info.Intro_book}}</td>
+		<td>{{book_info.Publishing_date|date:"Y-m-d"}}</td>
+		<td>{{book_info.Price}}</td>
+	</tr>
+
+{% else %}
+	<p>도서 데이터가 없습니다</p>
+{% endif %}
+

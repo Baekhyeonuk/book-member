@@ -1,0 +1,9 @@
+{% load static %}
+<br>
+<img src="{% static 'member/t1.jpg' %}" alt="My image" width="300">
+<br>
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="회원가입" />
+</form>

@@ -1,0 +1,15 @@
+
+
+<h1>도서 등록 페이지</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+도서명: <input type="text" name="Book_name"><br/>
+저자: <input type="text" name="Writer"><br/>
+출판일: <input type="text" name="Publishing_date"><br/>
+가격: <input type="text" name="Price"><br/>
+도서소개: <input type="text" name="Intro_book"><br/>
+
+<input type="submit" value="도서등록하기">
+</form>
+

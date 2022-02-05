@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<style>
+p,h1 { color:red;}
+h3 {color : green;}
+</style>
+</head>
+<body>
+{% load static %}
+<img src="{% static 'member/t1.jpg' %}" width="300"><br />
+{% block content %}
+{% endblock %}
+</body>
+</html>

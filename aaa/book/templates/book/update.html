@@ -1,0 +1,14 @@
+
+
+<h1>"{{Books.Book_name}}" 도서 수정 페이지</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+도서명 : <input type="text" name="Book_name" value="{{books.Book_name}}"><br/>
+저자 : <input type="text" name="Writer" value="{{books.Writer}}"><br/>
+출판일 : <input type="text" name="Publishing_date" value="{{books.Publishing_date}}"><br/>
+가격 : <input type="text" name="Price" value="{{books.Price}}"><br/>
+도서소개 : <input type="text" name="Intro_book" value="{{books.Intro_book}}"><br/>
+<input type="submit" value="도서정보수정하기">
+</form>
+

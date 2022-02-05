@@ -1,0 +1,9 @@
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+아이디 : <input type="text" name="mem_id" value="{{member.Mem_id}}"><br />
+비밀번호 : <input type="text" name="mem_pwd" value="{{member.Mem_pwd}}"><br />
+이름 : <input type="text" name="mem_name" value="{{member.Mem_name}}"><br />
+{% if member.Mem_img %}<img src="{{ member.Mem_img.url }}" width="200"><br />{% endif %}
+첨부파일 : <input type="file" name="upload_files"><br />
+<input type="submit" value="회원정보수정" />
+</form>

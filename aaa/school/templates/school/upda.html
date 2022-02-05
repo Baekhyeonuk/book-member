@@ -1,0 +1,13 @@
+<h1>{{ subject.id }} 과목 수정 페이지</h1>
+
+ 
+
+<form action="" method="post">
+
+{% csrf_token %}
+
+과목 이름: <input type="text" name="subject_text" value="{{subject.subject_text}}"><br />
+
+<input type="submit" value="과목정보수정하기">
+
+</form>

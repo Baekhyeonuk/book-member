@@ -1,0 +1,47 @@
+<script>
+
+function del(id){
+	var delmsg = confirm("정말 삭제하시겠습니까?")
+
+	if(delmsg) {
+		var URL="/book/"+id+"/remove/"; 
+		location.href=URL;
+	}
+
+}
+</script>
+{% load static %} 
+<img src="{% static 'book/jinju.jpg' %}" height = "300",width="2000" >
+<h2><도서목록></h2>
+<h3><a href="https://book.naver.com/" target="_blank">네이버도서검색</a> //<a href="https://www.aladin.co.kr/shop/common/wbest.aspx?BranchType=1&start=we" target="_blank"> 베스트셀러보기</a> </h3>
+
+<form action="" method="get">
+{% csrf_token %}
+<input type="text" name="search">
+<input type="submit" value="도서검색">
+</form>
+{% if latest_books_list %}
+<h3> 총 등록된 도서수 ({{latest_books_list.count}}) //  <a href="/book/add/">도서추가</a></h3>
+
+<table border="1">
+	<tr>
+		<th>번호</th>
+		<th>도서명</th>
+		<th>저자</th>
+		<th> 도서관리</th>
+
+	</tr>
+	{% for book in latest_books_list %}
+
+	<tr>
+		<td><a href="https://book.naver.com/search/search.nhn?sm=sta_hty.book&sug=&where=nexearch&query={{book.Book_name}}" target="_blank">{{book.id}}</a></td>
+		<td><a href="/book/{{book.id}}/detail/">{{book.Book_name}}</a></td>
+		<td>{{book.Writer}}</td>
+		<td><a href="/book/{{ book.id }}/update/">[정보수정]</a> <a href="#" onclick="del('{{books.id }}')">[도서 삭제]</a></td>
+
+	</tr>
+    {% endfor %}
+
+{% else %}
+	<p>도서 데이터가 없습니다</p>
+{% endif %}
